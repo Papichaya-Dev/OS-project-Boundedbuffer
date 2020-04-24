@@ -76,7 +76,7 @@ class Consumer extends Thread {
                 Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
             }
             final String c = buffer.delete();
-            System.out.println("\n" + name + " : " + c);
+            System.out.println("\n" + name + "ได้รับอาหาร" + " : " + c);
 
         }
         System.out.println("ได้รับออเดอร์ครบถ้วนแล้ว");
@@ -117,7 +117,7 @@ class BoundedBuffer {
         String[] menu2 = { "ไก่กระเทียม", "ราดหน้า", "ผัดซีอิ้ว", "หมูกรอบ", "พะโล้", "ราเมง" };
         // random x
         Random rand = new Random();
-        int max = 5;
+        int max = 10;
         int min = 1;
         int rand_int1 = rand.nextInt((max - min) + 1) + min;
         int rand_int2 = rand.nextInt((max - min) + 1) + min;
@@ -125,12 +125,11 @@ class BoundedBuffer {
         System.out.println("Grab Food รับออเดอร์ : " + rand_int1 + " เมนู");
         System.out.println("Panda Food รับออเดอร์ : " + rand_int2 + " เมนู");
         System.out.println("-----------------------------");
-        int x;
-        final Buffer buffer = new Buffer(2); // buffer has size 5
+        final Buffer buffer = new Buffer(4); // buffer has size 5
         final Producer prod1 = new Producer(buffer, menu1, "cheif 1 cooking ");
         final Producer prod2 = new Producer(buffer, menu2, "cheif 2 cooking ");
-        final Consumer cons = new Consumer(buffer, rand_int1, "Grab ได้รับอาหาร");
-        final Consumer cons2 = new Consumer(buffer, rand_int2, "Foodpanda ได้รับอาหาร");
+        final Consumer cons = new Consumer(buffer, rand_int1, "Grab");
+        final Consumer cons2 = new Consumer(buffer, rand_int2, "Foodpanda");
         prod1.start();
         prod2.start();
         cons.start();
